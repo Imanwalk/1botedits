@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+    <style>
+        .chat-container {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .message {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .input-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #userInput {
+            flex: 1;
+            padding: 8px;
+        }
+        button {
+            padding: 8px 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div id="chatMessages">
+            <div class="message">Hello! I am your bot. How can I assist you today?</div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Type your message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const message = userInput.value.trim();
+            
+            if (message) {
+                // Add user message
+                const chatMessages = document.getElementById('chatMessages');
+                const userDiv = document.createElement('div');
+                userDiv.className = 'message';
+                userDiv.style.backgroundColor = '#e3f2fd';
+                userDiv.textContent = message;
+                chatMessages.appendChild(userDiv);
+
+                // Add bot response
+                const botDiv = document.createElement('div');
+                botDiv.className = 'message';
+                botDiv.textContent = "I received your message: " + message;
+                chatMessages.appendChild(botDiv);
+
+                // Clear input
+                userInput.value = '';
+            }
+        }
+
+        // Allow sending message with Enter key
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
